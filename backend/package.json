@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
+    "inngest": "^3.44.3",
     "mongoose": "^9.2.1",
     "video-calling-interview-platform": "file:.."
   },
