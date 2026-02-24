@@ -8,6 +8,7 @@ import {inngest, functions} from "./lib/inngest.js";
 import { clerkMiddleware , requireAuth} from '@clerk/express';
 import { protectRoute } from "./middleware/protectRoute.js";
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoute from "./routes/sessionRoute.js";
 
 
 const app = express();
@@ -29,9 +30,10 @@ app.use(cors({
 
 app.use("/api/inngest", serve({client:inngest, functions}));
 app.use("/api/chat", chatRoutes);
+app.use("/api/sessions", sessionRoute);
 
 app.get("/health",requireAuth() ,(req,res) => {
-  res.status(200).json({msge:"health"})
+  res.status(200).json({msge:"health"});
 })
 
 // when you pass an array of middleware to Express, it automatically flattens and executes them sequentially, one by one
