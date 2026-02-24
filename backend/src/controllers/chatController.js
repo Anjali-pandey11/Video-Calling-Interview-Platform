@@ -13,6 +13,6 @@ export async function getStreamToken(req,res) {
     })
   } catch (error) {
     console.log("erro in getStreamToken",error.message);
-    res.status(500).json({msg:"Internal error"})
+    res.status(500).json({msg:"Internal error"});
   }  
 }
