@@ -11,20 +11,19 @@ function App() {
   const {isSignedIn, isLoaded} = useUser();
 
   // this will get rid of the flickering effect
+  // isLoaded ne premature routing decision ko stop kiya.
   if(!isLoaded) return null;
 
   return (
    <>
    {/* <h1 className="text-3xl font-bold underline">Welcome to the app</h1> */}
    <Routes>
-     
      <Route path="/" element={!isSignedIn ? <HomePage/> : <Navigate to={"/dashboard"} /> }/>
      <Route path="/dashboard" element={isSignedIn ? <DashboardPage/> : <Navigate to={"/"} /> }/>
      <Route path="/problems" element = {isSignedIn ?<ProblemsPage/>: <Navigate to = {"/"} />}/>
    </Routes>
-
+  
    <Toaster toastOptions={{duration:3000}}/>
-     
      
    </>
   )
