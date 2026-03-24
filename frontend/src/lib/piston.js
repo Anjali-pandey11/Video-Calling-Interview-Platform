@@ -1,22 +1,19 @@
-// Piston API is a service for code execution
 
-const PISTON_API = "https://piston.readthedocs.io/en/latest/api-v2/#post-apiv2execute"
+
+const ONLINE_COMPILER_API = "/api/execute/"; // proxy URL
 
 const LANGUAGE_VERSIONS = {
-  javascript: { language: "javascript", version: "18.15.0" },
-  python: { language: "python", version: "3.10.0" },
-  java: { language: "java", version: "15.0.2" },
+  javascript: { compiler: "typescript-deno",language: "javascript", version: "18.15.0"},  
+  python: { compiler: "python-3.14" },         
+  java: { compiler: "openjdk-25" },           
 };
 
-/*
- * @param {string} language - programming language
- * @param {string} code - source code to executed
- * @returns {Promise<{success:boolean, output?:string, error?: string}>}
- */
+export async function executeCode(language, code, input = "") {
 
-export async function executeCode(language, code) {
+  
   try {
     const languageConfig = LANGUAGE_VERSIONS[language];
+
 
     if (!languageConfig) {
       return {
@@ -25,53 +22,47 @@ export async function executeCode(language, code) {
       };
     }
 
-    const response = await fetch(`${PISTON_API}`, {
+    const response = await fetch(ONLINE_COMPILER_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // ✅ No API key needed here anymore
       },
-
       body: JSON.stringify({
-        language:languageConfig.language,
-        version:languageConfig.version,
-        files:[
-          {
-            name:`main.${getFileExtension(language)}`,
-            content:code
-          }
-        ]
-      })
-    })
+        compiler: languageConfig.compiler,
+        code: code,
+        input: input,
+      }),
+    });
 
-    if(!response.ok) {
+    if (!response.ok) {
       return {
-        success:false,
-        error:`HTTP error! status: ${response.status}`
-      }
+        success: false,
+        error: `HTTP error! status: ${response.status}`,
+      };
     }
 
     const data = await response.json();
+    const output = data.output || "";
 
-    const output = data.run.output || ""
+    const stderr = data.error || "";
 
-    // Yaha program errors store hote hain
-    const stderr = data.run.stderr || ""
 
-    if(stderr) {
+    if (stderr) {
       return {
-        success:"false",
-        output:output,
-        error:stderr
-      }
+        success: false,
+        output: output,
+        error: stderr,
+      };
     }
 
     return {
-      success:true,
-      output:output || "No output"
-    }
+      success: true,
+      output: output || "No output",
+    };
 
-  } catch(error){
-     return {
+  } catch (error) {
+    return {
       success: false,
       error: `Failed to execute code: ${error.message}`,
     };
@@ -84,6 +75,5 @@ function getFileExtension(language) {
     python: "py",
     java: "java",
   };
-
   return extensions[language] || "txt";
 }
