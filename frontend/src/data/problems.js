@@ -354,7 +354,7 @@ export const LANGUAGE_CONFIG = {
   },
   java: {
     name: "Java",
-    icon: "/java.png",
+    icon: "/java.webp",
     monacoLang: "java",
   },
 };

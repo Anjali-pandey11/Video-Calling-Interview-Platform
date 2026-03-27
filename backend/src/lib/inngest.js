@@ -26,10 +26,8 @@ const syncUser = inngest.createFunction(
         profileImage:image_url
       }
 
-    
       await User.create(newUser);
   
-      
       await upsertStreamUser({
         id:newUser.clerkId.toString(),
         name:newUser.name,
@@ -37,7 +35,6 @@ const syncUser = inngest.createFunction(
       });
 
       // send a welcome email here later
-
   }
 )
 
