@@ -11,6 +11,8 @@ import { Link } from "react-router";
 import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ActiveSessions({ sessions, isLoading, isUserInSession }) {
+
+
   return (
     <div className="lg:col-span-2 card bg-base-100 border-2 border-primary/20 hover:border-primary/30 h-full">
       <div className="card-body">
@@ -85,6 +87,7 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                     <button className="btn btn-disabled btn-sm">Full</button>
                   ) : (
                     <Link to={`/session/${session._id}`} className="btn btn-primary btn-sm gap-2">
+                      
                       {isUserInSession(session) ? "Rejoin" : "Join"}
                       <ArrowRightIcon className="size-4" />
                     </Link>
