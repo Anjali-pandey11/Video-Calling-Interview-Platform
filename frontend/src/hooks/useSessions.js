@@ -3,18 +3,19 @@ import toast from "react-hot-toast";
 import { sessionApi } from "../api/sessions";
 
 export const useCreateSession =  () => {
+  
   const result =  useMutation({
     mutationKey: ["createSession"],
     mutationFn: sessionApi.createSession,
     onSuccess: () => {
       toast.success("Session created successfully!")
-      console.log("success")
+   
   },
     onError: (error) => {toast.error(error.response?.data?.message || "Failed to create room")
-      console.log("error")
+      
     },
   });
-   console.log("result", result)
+   
   return result;
 };
 

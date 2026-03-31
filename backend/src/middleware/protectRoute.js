@@ -4,9 +4,11 @@ import User from '../models/User.js';
 export const protectRoute =  [
   requireAuth(),
   async (req, res, next) => {
-    
+   
     try {
       const clerkId = req.auth().userId;
+
+      
 
       if(!clerkId) return res.status(401).json({msg:"unauthorized-invalid token"})
 
@@ -18,6 +20,7 @@ export const protectRoute =  [
       if(!user) return res.status(404).json({msg:"user not found"});
 
       req.user = user;  // add user to request object
+      
       next()
       
 

@@ -13,6 +13,7 @@ import CreateSessionModal from "../components/CreateSessionModal";
 function DashboardPage() {
   const navigate = useNavigate();
   const { user } = useUser();
+ 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [roomConfig, setRoomConfig] = useState({ problem: "", difficulty: "" });
 
@@ -24,7 +25,7 @@ function DashboardPage() {
   const handleCreateRoom = () => {
     if (!roomConfig.problem || !roomConfig.difficulty) return;
 
-console.log("CLICKED"); 
+ 
     createSessionMutation.mutate(
       {
         problem: roomConfig.problem,
@@ -33,16 +34,18 @@ console.log("CLICKED");
       },
       {
         onSuccess: (data) => {
-          console.log(data)
+          
           setShowCreateModal(false);
           navigate(`/session/${data.session._id}`);
         },
       }
     );
-    console.log(roomConfig.difficulty)
+    
   };
 
   const activeSessions = activeSessionsData?.sessions || [];
+
+ 
   const recentSessions = recentSessionsData?.sessions || [];
 
   const isUserInSession = (session) => {
@@ -50,6 +53,8 @@ console.log("CLICKED");
 
     return session.host?.clerkId === user.id || session.participant?.clerkId === user.id;
   };
+
+  
 
   return (
     <>
