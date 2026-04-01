@@ -10,6 +10,10 @@ export default ({ mode }) => {
 
 return defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/',  // yeh add karo
+    build: {
+      outDir: 'dist',
+    },
  server: {
     proxy: {
       "/api/execute": {
