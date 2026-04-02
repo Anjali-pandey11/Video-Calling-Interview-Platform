@@ -43,14 +43,7 @@ app.get("/video-calling", protectRoute ,(req,res) => {
 })
 
 
-// make our app ready for deployment
-if(ENV.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
-  app.get("/{*splat}", (req,res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
-})
-}
 
 const startServer = async() => {
   try {
