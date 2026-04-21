@@ -11,9 +11,9 @@
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=flat-square&logo=clerk&logoColor=white)](https://clerk.com/)
 [![Stream](https://img.shields.io/badge/Stream-005FFF?style=flat-square&logo=stream&logoColor=white)](https://getstream.io/)
 
-A real-time technical interview platform with **live video calls**, **collaborative code editor**, and **AI-powered feedback** — built with the MERN stack.
+A real-time technical interview platform with **live video calls**, **collaborative code editor**,  — built with the MERN stack.
 
-[🚀 Live Demo](#) • [📺 Tutorial Video](https://youtu.be/PJ0ARnSKfgw) • [🐛 Report Bug](../../issues) • [💡 Request Feature](../../issues)
+
 
 </div>
 
