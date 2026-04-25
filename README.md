@@ -164,6 +164,6 @@ npm run dev
 
 **5. Open in browser**
 ```
-http://localhost:517
+http://localhost:5173
 
 
